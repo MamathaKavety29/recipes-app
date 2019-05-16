@@ -1,0 +1,89 @@
+
+
+<div style="float:left;width: 45%">
+<div class="pull-left">
+<div class="row">
+  <div class="col-xs-12">
+    <img [src]="recipe.imagePath" 
+    alt="{{recipe.name}}" 
+    class="img-responsive"
+    style="max-height:550px">
+  </div>
+  <div style="margin-top:20px">
+      <mat-icon (click)="countProd('remove', recipe)" color="primary">
+        remove</mat-icon
+      >
+      {{ counter }}
+      <mat-icon (click)="countProd('add', recipe)" color="primary"
+        >add</mat-icon
+      >
+    </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-xs-12" >
+    
+    <!-- <button  (click)="onAddItems(recipe)"
+     style="margin-right: 16px;" mat-raised-button color="primary">
+      <mat-icon>shopping_cart</mat-icon>Add To cart</button> -->
+
+      <mat-bar-button [options]="spinnerButtonOptions" (btnClick)="progresFunc('ADD TO CART')"
+         style="margin-right: 16px">
+      </mat-bar-button>
+
+    <button style="margin-right:10px;" mat-raised-button color="accent" 
+    (click)="onBuy()">
+      <mat-icon>flash_on</mat-icon>BUY NOW</button>
+
+        <br>
+
+  
+</div>
+  </div>
+</div>
+<br>
+
+<!-- <div class="vr">&nbsp;</div> -->
+
+<span class="pull-right" style="padding:0px 0px 0px 24px;width:30%;margin-left:20px;margin-top: 1px;float:right;" >
+<div class="row">
+  <div class="col-xs-12">
+    <h1>{{recipe.name}}</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="btn-group"
+    appdropdown>
+    <button
+      type="button" class="btn btn-primary dropdown-toggle">Manage Recipe
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <li><a (click)="addToShoppingList()" style="cursor:pointer;">To Shopping List</a></li>
+      <li><a (click)="onEditRecipe()" style="cursor:pointer;" *ngIf="adminMode">Edit Recipe</a></li>
+      <li><a (click)="onDeleteRecipe()" style="cursor:pointer;" *ngIf="adminMode">Delete recipe</a></li> 
+      
+      
+    </ul>
+    </div>
+  </div>
+</div>
+<div class="row">
+    <div class="col-xs-12" style="width:300%">
+     Description:{{recipe.description}}
+    </div>
+  </div>
+<div class="row">
+  <div class="col-xs-12" style="width:200%">
+      <ul class="list-group">
+        <li styclass="list-group-item" style="margin-left:15px"
+          *ngFor="let ingredient of recipe.ingredients">
+        {{ingredient.name}} - {{ingredient.amount}}</li>
+        
+      </ul>
+  </div>
+</div>
+</span>
+</div>
+<br>

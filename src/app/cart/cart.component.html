@@ -1,0 +1,82 @@
+<div *ngIf="items && items.length ? items.length : 0; else emptyCart">
+  <div style="width:60%;float: left">
+    <mat-card>
+      <h1 mat-dialog-title>My Cart</h1>
+      <hr />
+      <div *ngFor="let item of items; let i = index">
+        <h4 mat-dialog-title>{{ item.name }}</h4>
+        <div mat-dialog-content>
+          <div>
+            <div style="float:left;width: 30%">
+              <div class="row">
+                <div class="col-xs-12">
+                  <img
+                    [src]="item.imagePath"
+                    alt="name"
+                    class="img-responsive"
+                    style="max-height:100px;width: 200px"/>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h4>{{ item.name }}</h4>
+              <div>{{ item.description }}</div>
+              <div>{{ item.itemCost }}</div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            
+
+            <div>
+              <button
+                style="margin-top:20px"
+                (click)="onRemoveItem(i)"
+                mat-raised-button
+                color="primary"
+              >
+                REMOVE ITEM
+              </button>
+            </div>
+            <hr />
+          </div>
+        </div>
+      </div>
+      <div>
+        <button mat-raised-button color="primary">CONTINUE SHOPPING</button>
+        <button
+          style="margin-left:15px;margin-top: 15px"
+          mat-raised-button
+          color="accent"
+          (click)="onPlaceOrder()"
+        >
+          PLACE ORDER
+        </button>
+      </div>
+    </mat-card>
+  </div>
+  
+  <hr />
+</div>
+
+<div style="width:30%;float:right;height: 400px;margin-right: 10px">
+  <mat-card>
+    <h4 style="color:grey">PRICE DETAILS</h4>
+    <hr />
+    <div>Price({{ items && items.length ? items.length : 0 }}):</div>
+    <div>Delivery Charges:"FREE"</div>
+    <span style="color:grey;width: 30%">.............................</span
+    ><br />
+    <div>Amount Payable:</div>
+    <!-- <span>{{ totalAmt() }}</span -->
+    ><br />
+    <span style="color:grey;width: 30%">.............................</span>
+  </mat-card>
+</div>
+
+<ng-template #emptyCart class="center">
+  <mat-card>
+    <img src="../../assets/images/empty-cart.png" alt="EMPTY CART" />
+  </mat-card>
+</ng-template>

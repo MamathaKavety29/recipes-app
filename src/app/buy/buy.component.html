@@ -1,0 +1,120 @@
+
+ <mat-horizontal-stepper labelPosition="bottom" #stepper>
+  <mat-step [stepControl]="addressForm">
+        <form [formGroup]="addressForm" (ngSubmit)="onSubmit()">
+            <ng-template matStepLabel>Fill out your Address</ng-template>
+
+          <div class="form-group">
+            <input type="text" 
+            class="form-control" formControlName="FirstName"
+            id="FirstName" placeholder="Enter FirstName" name="FirstName">
+          </div>
+          <span class="const" *ngIf="!addressForm.get('FirstName').valid && addressForm.get('FirstName').touched"
+          class="help-block">Plz enter valid name</span>
+
+          <div class="form-group">
+              
+              <input type="text"
+               class="form-control" formControlName="LastName"
+                id="LastName" placeholder="Enter LastName" name="LastName">
+            </div>
+            <span class="const" *ngIf="!addressForm.get('LastName').valid && addressForm.get('LastName').touched"
+          class="help-block">Plz enter valid name</span>
+
+            <div class="form-group">
+                <input type="email" 
+                class="form-control" formControlName="Email"
+                id="Email" placeholder="Enter your email" name="Email">
+            </div>
+              <span class="const" *ngIf="!addressForm.get('Email').valid && addressForm.get('Email').touched"
+          class="help-block">Plz enter valid email</span>
+
+              <!-- <div class="form-group">
+                  <input type="password" 
+                  class="form-control" formControlName="Password"
+                  id="Password" placeholder="Enter your password" name="Password">
+              </div> -->
+                <!-- <span class="const" *ngIf="!addressForm.get('Password').valid && addressForm.get('Password').touched"
+          class="help-block">Plz enter password</span> -->
+
+          <div class="form-group">
+              <input type="number" 
+              class="form-control" formControlName="Number"
+              id="Number" placeholder="Enter your Mobile Number" name="Number">
+            </div>
+            <span class="const" *ngIf="!addressForm.get('Number').valid && addressForm.get('Number').touched"
+      class="help-block">Plz enter valid mobile number</span>
+
+            <!-- <div class="container">
+            <div class="form-group">
+                <button class="button">Change</button>
+                <textarea contenteditable="true" type="text" rows="4"
+                 class="form-control" formControlName="Address1"
+                 id="Address1" placeholder="Enter Address" name="Address1">
+                 </textarea>
+              </div>
+              <span class="const" *ngIf="!addressForm.get('Address1').valid && addressForm.get('Address1').touched"
+          class="help-block">Plz enter valid address</span>
+            </div> -->
+              
+               
+               <div>
+                <button [disabled]="!addressForm.valid" style="position: absolute;top: 105%" type="submit" mat-raised-button matStepperNext color="primary">
+                    NEXT</button>
+                    </div>
+
+                    <div>
+                      
+                    </div>
+
+</form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+        <ng-template matStepLabel>Your Conformed Delivery Address</ng-template>
+        <div class="row" *ngIf="submitted">
+            <div class="col-xs-12">
+              <!-- <h3>Your Conformed Delivery Address:</h3>
+              <p>FirstName:{{addressData.FirstName}}</p>
+              <p>LastName:{{addressData.LastName}}</p>
+              <p>Email:{{addressData.Email}}</p>
+              <p>Mobile: {{addressData.Number}}</p>
+              <p>Address1:{{addressData.Address1}}</p>
+              <p>Address2:{{addressData.Address2}}</p>
+              <hr><hr>
+              <button  mat-raised-button matStepperPrevious color="primary">PREVIOUS</button>
+              <button style="margin-top:20px;margin-left: 20px"  mat-raised-button color="primary" matStepperNext>NEXT</button> -->
+                
+              <div class="container">
+            <div class="form-group">
+                <button class="button">Change</button>
+                <textarea contenteditable="true" type="text" rows="4"
+                 class="form-control" formControlName="Address1"
+                 id="Address1" placeholder="Enter Address" name="Address1">
+                 </textarea>
+              </div>
+              <span class="const" *ngIf="!addressForm.get('Address1').valid && addressForm.get('Address1').touched"
+          class="help-block">Plz enter valid address</span>
+            </div>
+
+            </div>
+          </div>
+          <hr><hr>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Placed order</ng-template>
+      <div  style="text-align:center">
+          <button style="margin-top:20px;margin-left:20px"  mat-raised-button color="primary"
+           (click)="openSnackBar()">PAY</button>
+
+          <button style="margin-top:20px;margin-left: 20px"  mat-raised-button color="primary" (click)="stepper.reset()" matStepperNext>RESET</button>
+
+
+      </div>
+    </mat-step>
+    
+  </mat-horizontal-stepper> 
+
+
+  
+

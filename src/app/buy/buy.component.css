@@ -1,0 +1,78 @@
+/* .form-group{
+    margin-top: 10px;
+    margin-left: 50px;
+} */
+input.ng-invalid.ng-touched,textarea.ng-invalid.ng-touched{
+    border: 1px solid red;
+}
+
+
+  
+.form-control{
+    width: 60%;
+}
+span{
+    color: red;
+    margin-top: 10px;
+    margin-left: 12px;
+    margin-bottom: 3px;
+}
+
+/* 
+.form {
+    border: 1px solid gray;
+     width: 64em;
+      height: 6em;
+      float:left 
+      
+    }
+button {
+    float: right;
+    margin-left: 100px;
+    margin-right: 305px;
+    padding-bottom: 41px;
+
+} */
+
+
+/* .container {
+    position:relative;
+    width: 300px;
+    height: 100px;
+    border: 1px solid #ddd;
+}
+.button {
+    position:absolute;
+    top: 3px;
+    right:3px;
+    width: 60px;
+}
+textarea {
+    position:relative;
+    border:none;
+    width:220px;
+    height: 95px;
+    /* resize: none;
+    outline: none; add this to stop highlight on focus */ 
+.container{
+    position: relative;
+    
+}
+    textarea{
+        position: relative;
+        border: 1px solid grey;
+        margin-left: -15px;
+        width:470px;
+
+    }
+    .button
+    {
+    position: absolute;
+    right: 300px;
+    position: absolute;
+    top: 352px;
+    padding-bottom: 66px;
+    padding-right: 57px;
+    padding-left: 6px;
+    width: 20px;
+    }

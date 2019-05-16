@@ -1,0 +1,29 @@
+
+<h1 *ngIf="userMode">List Of The Recipes</h1>
+<div class="row" *ngIf="adminMode">
+ <div class="col-xs-20">
+     <button class="btn btn-success" (click)="newRecipe()" >New recipe</button>
+ </div>
+ <hr/>
+ <div class="row" *ngIf="adminMode">
+     <div class="col-xs-12">
+       
+        <app-recipes-item *ngFor='let recipeEl of recipes;let i=index'
+        [recipe]="recipeEl"
+        [index]="i"></app-recipes-item>
+     </div>
+ </div>
+</div>
+
+
+
+
+<div id="col" class="row" *ngIf="userMode">
+        
+        <app-recipes-item class="column"  style="width:100%"
+        *ngFor='let recipeEl of recipes;let i=index'
+        [recipe]="recipeEl"
+        [index]="i"></app-recipes-item>
+        
+   
+</div>
