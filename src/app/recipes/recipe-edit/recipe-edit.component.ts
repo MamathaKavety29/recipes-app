@@ -35,11 +35,11 @@ constructor(private route:ActivatedRoute,
     let description='';
     if(this.editMode){
       const recipe=this.recipeService.getRecipe(this.id);
-       recipename=recipe.name;
-       imagePath=recipe.imagePath;
-       description=recipe.description;
-       if(recipe['ingredients']){
-         for(let ingredient of recipe.ingredients){
+      recipename=recipe.name;
+      imagePath=recipe.imagePath;
+      description=recipe.description;
+      if(recipe['ingredients']){
+      for(let ingredient of recipe.ingredients){
           recipeIngredients.push(
             new FormGroup({
               'name':new FormControl(ingredient.name),
@@ -59,7 +59,7 @@ constructor(private route:ActivatedRoute,
     });
   }
   onDeleteIngredient(index:number){
-    (<FormArray>this.recipeForm.get('ingredients')).removeAt(index);
+    ( <FormArray>this.recipeForm.get('ingredients')).removeAt(index);
 
   }
   onAddIngredient(){
@@ -77,6 +77,7 @@ constructor(private route:ActivatedRoute,
   }
   else{
     this.recipeService.addRecipe(this.recipeForm.value);
+    console.log(this.recipeForm.value);
   }
   this.recipeForm.reset();
   this.onCancel();

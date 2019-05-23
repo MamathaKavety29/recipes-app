@@ -1,120 +1,393 @@
-
- <mat-horizontal-stepper labelPosition="bottom" #stepper>
-  <mat-step [stepControl]="addressForm">
-        <form [formGroup]="addressForm" (ngSubmit)="onSubmit()">
-            <ng-template matStepLabel>Fill out your Address</ng-template>
-
-          <div class="form-group">
-            <input type="text" 
-            class="form-control" formControlName="FirstName"
-            id="FirstName" placeholder="Enter FirstName" name="FirstName">
-          </div>
-          <span class="const" *ngIf="!addressForm.get('FirstName').valid && addressForm.get('FirstName').touched"
-          class="help-block">Plz enter valid name</span>
-
-          <div class="form-group">
-              
-              <input type="text"
-               class="form-control" formControlName="LastName"
-                id="LastName" placeholder="Enter LastName" name="LastName">
-            </div>
-            <span class="const" *ngIf="!addressForm.get('LastName').valid && addressForm.get('LastName').touched"
-          class="help-block">Plz enter valid name</span>
-
-            <div class="form-group">
-                <input type="email" 
-                class="form-control" formControlName="Email"
-                id="Email" placeholder="Enter your email" name="Email">
-            </div>
-              <span class="const" *ngIf="!addressForm.get('Email').valid && addressForm.get('Email').touched"
-          class="help-block">Plz enter valid email</span>
-
-              <!-- <div class="form-group">
-                  <input type="password" 
-                  class="form-control" formControlName="Password"
-                  id="Password" placeholder="Enter your password" name="Password">
-              </div> -->
-                <!-- <span class="const" *ngIf="!addressForm.get('Password').valid && addressForm.get('Password').touched"
-          class="help-block">Plz enter password</span> -->
-
-          <div class="form-group">
-              <input type="number" 
-              class="form-control" formControlName="Number"
-              id="Number" placeholder="Enter your Mobile Number" name="Number">
-            </div>
-            <span class="const" *ngIf="!addressForm.get('Number').valid && addressForm.get('Number').touched"
-      class="help-block">Plz enter valid mobile number</span>
-
-            <!-- <div class="container">
-            <div class="form-group">
-                <button class="button">Change</button>
-                <textarea contenteditable="true" type="text" rows="4"
-                 class="form-control" formControlName="Address1"
-                 id="Address1" placeholder="Enter Address" name="Address1">
-                 </textarea>
+<!-- <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          ADDRESS FORM
+        </mat-panel-title>
+        </mat-expansion-panel-header>
+      <form [formGroup]="deliveryForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            placeholder="Enter name"
+            name="name"
+            formControlName="name"
+          />
+        </div>
+        <span
+          *ngIf="
+            !deliveryForm.get('name').valid && deliveryForm.get('name').touched
+          "
+          >Plz enter valid name</span
+        >
+  
+        <div class="form-group">
+          <label for="Mobile Number">Mobile Number:</label>
+          <input
+            type="number"
+            class="form-control"
+            id="number"
+            placeholder="Enter number"
+            name="number"
+            formControlName="number"
+          />
+        </div>
+        <span
+          *ngIf="
+            !deliveryForm.get('number').valid &&
+            deliveryForm.get('number').touched
+          "
+          >Plz enter valid number</span
+        >
+  
+        <div class="form-group">
+          <label for="pincode">Pincode:</label>
+          <input
+            type="number"
+            class="form-control"
+            id="pincode"
+            placeholder="Enter pincode"
+            name="pincode"
+            formControlName="pincode"
+          />
+        </div>
+        <span
+          *ngIf="
+            !deliveryForm.get('pincode').valid &&
+            deliveryForm.get('pincode').touched
+          "
+          >Plz enter valid pincode</span
+        >
+  
+        <div class="form-group">
+          <label for="Address">Address</label>
+          <textarea
+            class="form-control"
+            rows="3"
+            formControlName="address"
+            name="address"
+          ></textarea>
+        </div>
+        <span
+          *ngIf="
+            !deliveryForm.get('address').valid &&
+            deliveryForm.get('address').touched
+          "
+          >Plz enter valid address</span
+        >
+  
+        <div class="form-group">
+          <label for="city">City:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="city"
+            formControlName="city"
+            placeholder="Enter city name"
+            name="city"
+          />
+        </div>
+  
+        <div class="form-group">
+          <label for="state">State:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="state"
+            placeholder="Enter state"
+            name="state"
+            formControlName="state"
+          />
+        </div>
+        <span
+          *ngIf="
+            !deliveryForm.get('state').valid && deliveryForm.get('state').touched
+          "
+          >Plz enter valid state</span
+        >
+        <br>
+  
+        <button style="left: 383px" type="submit" mat-raised-button color="warn">SAVE AND DELIVER HERE</button>
+        
+      </form>
+      </mat-expansion-panel>
+       <br>
+      <mat-expansion-panel>
+          <mat-expansion-panel-header>
+              <mat-panel-title>
+                ADDRESS DETAILS
+              </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div *ngFor="let address of addresses;let i=index">
+                <div>
+                <div>
+                  <p><strong>{{address.name}}-{{address.number}}</strong></p>
+                  <p>{{address.address}} {{address.city}} {{address.state}} {{address.pincode}}
+                    </p>   
               </div>
-              <span class="const" *ngIf="!addressForm.get('Address1').valid && addressForm.get('Address1').touched"
-          class="help-block">Plz enter valid address</span>
-            </div> -->
+                
+              <div>
+                  <button  mat-raised-button color="warn" (click)="onEdit(i,address)">EDIT ADDRESS</button>
+              </div>
+              </div><hr>
+
+              </div> 
+
+               
+        </mat-expansion-panel>
+
+  </mat-accordion>
+
+-->
+
+
+
+<mat-horizontal-stepper>
+  <mat-step>
+    <ng-template matStepLabel>Fill out your Details</ng-template>
+    <mat-accordion>
+        <mat-expansion-panel [expanded]="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              LOGIN
+            </mat-panel-title>
+            </mat-expansion-panel-header>
+    <form [formGroup]="deliveryForm1" (ngSubmit)="onSubmit1()">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          placeholder="Enter name"
+          name="name"
+          formControlName = "name"
+          
+        />
+      </div>
+      <!-- <span
+        *ngIf="
+          !deliveryForm.get('name').valid && deliveryForm.get('name').touched
+        "
+        >Plz enter valid name</span> -->
+
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            placeholder="Enter email"
+            name="email"
+            formControlName = "email"
+          />
+        </div>
+        <!-- <span
+          *ngIf="
+            !deliveryForm.get('email').valid && deliveryForm.get('email').touched
+          "
+          >Plz enter valid email</span> -->
+
+          <button type="submit" mat-raised-button matStepperNext color="warn">Next</button>
+
+    </form>
+    </mat-expansion-panel>
+    </mat-accordion>
+  </mat-step>
+
+  <mat-step>
+      <ng-template matStepLabel>Fill out your Address Details</ng-template>
+      <mat-accordion>
+          <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                ADDRESS FORM
+              </mat-panel-title>
+              </mat-expansion-panel-header>
+              <ng-template #MsgRef>
+                  <form [formGroup]="deliveryForm2" (ngSubmit)="onSubmit2()"> 
+                     <div class="form-group">
+                         <label for="Address">Address</label>
+                         <textarea
+                           class="form-control"
+                           rows="3"
+                           name="address"
+                           formControlName = "address"
+                         ></textarea>
+                       </div>
+              
+                       <div class="form-group">
+                           <label for="Mobile Number">Mobile Number:</label>
+                           <input
+                             type="number"
+                             class="form-control"
+                             id="number"
+                             placeholder="Enter number"
+                             name="number"
+                             formControlName="number"
+                           />
+                         </div>
+              
+                       <div class="form-group">
+                           <label for="city">City:</label>
+                           <input
+                             type="text"
+                             class="form-control"
+                             id="city"
+                             placeholder="Enter city name"
+                             name="city"
+                             formControlName = "city"
+                           />
+                         </div>
+              
+                         <div class="form-group">
+                             <label for="state">State:</label>
+                             <input
+                               type="text"
+                               class="form-control"
+                               id="state"
+                               placeholder="Enter state"
+                               name="state"
+                               formControlName = "state"
+                                />
+                           </div>
+              
+                           <div class="form-group">
+                               <label for="pincode">Pincode:</label>
+                               <input
+                                 type="number"
+                                 class="form-control"
+                                 id="pincode"
+                                 placeholder="Enter pincode"
+                                 name="pincode"
+                                 formControlName = "pincode"
+                               />
+                             </div>
+              
+                             <button type="submit" mat-raised-button matStepperPrevious color="warn">PREVIOUS</button>
+                             <button style="margin-left: 20px;" mat-raised-button matStepperNext color="warn">NEXT</button>
+              
+              
+                  </form>
+                  </ng-template>
+
+                  <ng-template [ngTemplateOutlet]="MsgRef"></ng-template> 
+               
+
+     </mat-expansion-panel>
+     </mat-accordion>
+  </mat-step>
+
+  <mat-step>
+      <ng-template matStepLabel>List of Addresses</ng-template>
+      <mat-accordion>
+          <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                ADDRESSES
+              </mat-panel-title>
+              </mat-expansion-panel-header>
+              <mat-radio-group
+  aria-labelledby="example-radio-group-label"
+  class="example-radio-group"
+  [(ngModel)]="selectedAddress">
+
+  <mat-radio-button  class="example-radio-button" *ngFor="let address of addresses;let i = index" [value]="address">
+
+
+      <div style="width: 80%">
+        <div>
+          <p><strong>{{address.name}} {{address.number}} {{address.email}}</strong></p>
+          <p>{{address.address}} {{address.city}} {{address.state}} {{address.pincode}}</p>
+           
+        </div>
+
+        <div>
+            <button mat-raised-button color="warn" (click)="onEdit(i,address)">EDIT ADDRESS</button>
+            <button style="margin-left: 20px;" mat-raised-button color="warn" (click)="onRemove(i)">REMOVE</button>
+        </div> 
+
+    </div>
+    <br><hr>
+        </mat-radio-button>
+        </mat-radio-group>
+      
+        </mat-expansion-panel>
+ 
+      <mat-expansion-panel>
+          <mat-expansion-panel-header>
+              <mat-panel-title>
+                ADD NEW ADDRESS
+                </mat-panel-title>
+                </mat-expansion-panel-header>
+                <ng-template [ngTemplateOutlet]="MsgRef"></ng-template> 
+        </mat-expansion-panel>
+          <br>        
+
+        </mat-accordion>
+        <div>
+            <button mat-raised-button matStepperPrevious color="warn">Back</button>
+            <button style="margin-left: 20px;" mat-raised-button matStepperNext color="warn">Next</button>
+          </div>
+  </mat-step>
+
+  <mat-step>
+      <ng-template matStepLabel>ORDER SUMMARY</ng-template>
+      <mat-accordion>
+          <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                ORDER SUMMARY
+              </mat-panel-title>
+              </mat-expansion-panel-header>
               
                
-               <div>
-                <button [disabled]="!addressForm.valid" style="position: absolute;top: 105%" type="submit" mat-raised-button matStepperNext color="primary">
-                    NEXT</button>
-                    </div>
-
-                    <div>
-                      
-                    </div>
-
-</form>
-    </mat-step>
-    <mat-step [stepControl]="secondFormGroup">
-        <ng-template matStepLabel>Your Conformed Delivery Address</ng-template>
-        <div class="row" *ngIf="submitted">
-            <div class="col-xs-12">
-              <!-- <h3>Your Conformed Delivery Address:</h3>
-              <p>FirstName:{{addressData.FirstName}}</p>
-              <p>LastName:{{addressData.LastName}}</p>
-              <p>Email:{{addressData.Email}}</p>
-              <p>Mobile: {{addressData.Number}}</p>
-              <p>Address1:{{addressData.Address1}}</p>
-              <p>Address2:{{addressData.Address2}}</p>
-              <hr><hr>
-              <button  mat-raised-button matStepperPrevious color="primary">PREVIOUS</button>
-              <button style="margin-top:20px;margin-left: 20px"  mat-raised-button color="primary" matStepperNext>NEXT</button> -->
+                 <div *ngIf="selectedAddress">
+                 <strong>YOUR ADDRESS DETAILS:</strong><p> <strong>{{selectedAddress.name}}-{{selectedAddress.number}}-{{selectedAddress.email}}</strong></p>
+                 <p>{{selectedAddress.address}} {{selectedAddress.city}} {{selectedAddress.state}} {{selectedAddress.pincode}}</p>
+                 </div>
                 
-              <div class="container">
-            <div class="form-group">
-                <button class="button">Change</button>
-                <textarea contenteditable="true" type="text" rows="4"
-                 class="form-control" formControlName="Address1"
-                 id="Address1" placeholder="Enter Address" name="Address1">
-                 </textarea>
-              </div>
-              <span class="const" *ngIf="!addressForm.get('Address1').valid && addressForm.get('Address1').touched"
-          class="help-block">Plz enter valid address</span>
-            </div>
+             
+ </mat-expansion-panel>
+ <br>
+<mat-expansion-panel>
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+          ORDER DETAILS
+        </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-cart></app-cart>
+  </mat-expansion-panel>
 
-            </div>
-          </div>
-          <hr><hr>
-    </mat-step>
+  <br>
 
-    <mat-step>
-      <ng-template matStepLabel>Placed order</ng-template>
-      <div  style="text-align:center">
-          <button style="margin-top:20px;margin-left:20px"  mat-raised-button color="primary"
-           (click)="openSnackBar()">PAY</button>
+  <mat-expansion-panel>
+      <mat-expansion-panel-header>
+          <mat-panel-title>
+            PAYEMNT OPTIONS
+          </mat-panel-title>
+          </mat-expansion-panel-header>
 
-          <button style="margin-top:20px;margin-left: 20px"  mat-raised-button color="primary" (click)="stepper.reset()" matStepperNext>RESET</button>
+          <mat-radio-group aria-labelledby="example-radio-group-label"
+        class="example-radio-group">
+  <mat-radio-button class="example-radio-button"  [value]="Credit">
+  Credit / debit
+  </mat-radio-button>
+  <mat-radio-button class="example-radio-button"  [value]="Cash">
+      Cash On Delivery
+      </mat-radio-button>
+      <mat-radio-button class="example-radio-button"  [value]="Net">
+          Net Banking
+      </mat-radio-button>
+</mat-radio-group>
 
+</mat-expansion-panel>
+<br>
+ </mat-accordion>
+ </mat-step>
+</mat-horizontal-stepper>
 
-      </div>
-    </mat-step>
-    
-  </mat-horizontal-stepper> 
-
-
-  
 

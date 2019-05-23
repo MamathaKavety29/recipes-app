@@ -17,7 +17,7 @@ import { DropDownDirective } from './shared/dropdown.directive';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { SignupComponent } from './auth/user/Usersignup/signup.component';
 import { SigninComponent } from './auth/user/Usersignin/signin.component';
 import { AdminSigninComponent } from './auth/admin/Adminsignin/signin.component';
@@ -31,9 +31,10 @@ import {MatIconModule} from '@angular/material/icon';
 import { BuyComponent } from './buy/buy.component';
 import { HeaderComponent } from './header/header.component';
 import { MatProgressButtonsModule } from 'mat-progress-buttons';
-import { AddressPopupComponent } from './recipes/recipes-detial/adressesPopup/addressPop.component';
-import { UserService } from './shared/userAddress/user.service';
-import { DailogComponent } from './recipes/recipes-detial/dailogPopup/dailog.component';
+import { FormComponent } from './form/form.component';
+import { DailogFormComponent } from './buy/dailogform/dailogform.component';
+
+
 // import { UserService } from './recipes/recipes-detial/user.service';
 
 
@@ -46,20 +47,21 @@ import { DailogComponent } from './recipes/recipes-detial/dailogPopup/dailog.com
     AppComponent,
     RecipesComponent,
     RecipesListComponent,
-    RecipesDetialComponent,
+    RecipesDetialComponent,DailogFormComponent,
     RecipesItemComponent,
     ShoppingListComponent,
     ShoppingEditComponent,
     BasicDirective,
+    FormComponent,
     BetterDirectiveDirective,
     UnlessDirective,
     HeaderComponent,
     DropDownDirective,
     RecipeStartComponent,
     RecipeEditComponent,
-    SignupComponent,AddressPopupComponent,
+    SignupComponent,
     SigninComponent,
-    AdminSigninComponent,DailogComponent,
+    AdminSigninComponent,
     AdminSignupComponent,
     CartComponent,
     BuyComponent
@@ -79,10 +81,11 @@ import { DailogComponent } from './recipes/recipes-detial/dailogPopup/dailog.com
     AppRoutingModule,
     BrowserAnimationsModule,NoopAnimationsModule,MatButtonModule, MatCheckboxModule
   ],
-  entryComponents: [DailogComponent,AddressPopupComponent],
+  
   providers: [
-    ShoppingListService,UserService
+    ShoppingListService
   ],
+  entryComponents:[DailogFormComponent,BuyComponent],
   bootstrap: [AppComponent]
 })
 

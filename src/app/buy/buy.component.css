@@ -6,18 +6,30 @@ input.ng-invalid.ng-touched,textarea.ng-invalid.ng-touched{
     border: 1px solid red;
 }
 
-
+mat-expansion-panel-header{
+    background-color: blue;
+}
   
 .form-control{
     width: 60%;
 }
+
+.example-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+  }
+  
+  .example-radio-button {
+    margin: 5px;
+  }
 span{
     color: red;
     margin-top: 10px;
     margin-left: 12px;
     margin-bottom: 3px;
 }
-
+/* 
 /* 
 .form {
     border: 1px solid gray;
@@ -54,7 +66,7 @@ textarea {
     height: 95px;
     /* resize: none;
     outline: none; add this to stop highlight on focus */ 
-.container{
+/* .container{
     position: relative;
     
 }
@@ -64,15 +76,21 @@ textarea {
         margin-left: -15px;
         width:470px;
 
-    }
-    .button
-    {
+    } */
+    mat-action-row{
+    height: 60px;
+  position: relative;
+  
+}
+
+mat-action-row button {
+    margin: 0;
     position: absolute;
-    right: 300px;
-    position: absolute;
-    top: 352px;
-    padding-bottom: 66px;
-    padding-right: 57px;
-    padding-left: 6px;
-    width: 20px;
-    }
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    padding: 8px;
+  }
+
+    

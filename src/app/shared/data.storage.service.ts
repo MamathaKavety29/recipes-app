@@ -25,8 +25,8 @@ getRecipes(){
     const tk=this.authService.getToken();
 
  return this.http.get('https://ng-recipebook-889d3.firebaseio.com/recipes.json?auth='+tk).subscribe(
-(rescipes:Recipe[])=>{
-this.recipeService.setRecipes(rescipes);
+(recipes:Recipe[])=>{
+this.recipeService.setRecipes(recipes);
 }
  );
    

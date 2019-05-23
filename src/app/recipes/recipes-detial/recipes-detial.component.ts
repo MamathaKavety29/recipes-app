@@ -6,9 +6,8 @@ import { AuthService } from "src/app/auth/user.auth.service";
 import { CartService } from "src/app/cart/cart.service";
 import { MatProgressButtonOptions } from "mat-progress-buttons";
 import { MatBottomSheet, MatBottomSheetRef, MatDialog } from "@angular/material";
-import { UserService } from "src/app/shared/userAddress/user.service";
-import { AddressPopupComponent } from './adressesPopup/addressPop.component';
-import { DailogComponent } from './dailogPopup/dailog.component';
+
+
 
 @Component({
   selector: "app-recipes-detial",
@@ -36,7 +35,7 @@ export class RecipesDetialComponent implements OnInit {
   constructor(
     private recipeService: RecipeService,
     private route: ActivatedRoute,
-    private userservice: UserService,
+    
     private router: Router,public dailog:MatDialog,
     private authService: AuthService,
     private bottomSheet: MatBottomSheet,
@@ -75,7 +74,7 @@ export class RecipesDetialComponent implements OnInit {
   }
 
   countProd(filter: string, itemInCart: any) {
-    if (filter == "add") {
+    if (filter == 'add') {
       this.counter = this.counter + 1;
       this.cartService.updateShoppingCart(itemInCart);
     } else {
@@ -94,10 +93,11 @@ export class RecipesDetialComponent implements OnInit {
   }
 
   onBuy() {
-    // this.bottomSheet.open(AddressPopupComponent);
+
 
   this.router.navigate(['/buy']);
-    // const dailogRef = this.dailog.open(DailogComponent);
+
+
   }
 }
 

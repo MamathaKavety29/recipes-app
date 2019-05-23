@@ -14,6 +14,7 @@ import { AdminSignupComponent } from './auth/admin/Adminsignup/signup.component'
 import { HeaderComponent } from './header/header.component';
 import { CartComponent } from './cart/cart.component';
 import { BuyComponent } from './buy/buy.component';
+import { FormComponent } from './form/form.component';
 
 
 const routes: Routes = [
@@ -23,7 +24,6 @@ const routes: Routes = [
    {path:'',component:RecipeStartComponent},
    {path:'new',component:RecipeEditComponent,canActivate:[AuthGuard]},
   //  {path:':id',component:RecipesDetialComponent},
-  {path:':id/edit',component:RecipeEditComponent,canActivate:[AuthGuard]},
   ]
 },
 {path:'cart',component:CartComponent},
@@ -33,7 +33,10 @@ const routes: Routes = [
  {path:'signin',component:SigninComponent},
  {path:'adminSignin',component:AdminSigninComponent},
 {path:'adminsignup',component:AdminSignupComponent},
-{path:'buy',component:BuyComponent}
+{path:'buy',component:BuyComponent},
+{path:'recipes/:id/edit',component:RecipeEditComponent,canActivate:[AuthGuard]},
+{path:'form',component:FormComponent}
+
 
 
 

@@ -1,0 +1,116 @@
+<div>
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span>EDIT ADDRESS</span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <form [formGroup]="deliveryForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        placeholder="Enter name"
+        name="name"
+        formControlName="name"
+      />
+    </div>
+    <span
+      *ngIf="
+        !deliveryForm.get('name').valid && deliveryForm.get('name').touched
+      "
+      >Plz enter valid name</span
+    >
+
+    <div class="form-group">
+      <label for="Mobile Number">Mobile Number:</label>
+      <input
+        type="number"
+        class="form-control"
+        id="number"
+        placeholder="Enter number"
+        name="number"
+        formControlName="number"
+      />
+    </div>
+    <span
+      *ngIf="
+        !deliveryForm.get('number').valid && deliveryForm.get('number').touched
+      "
+      >Plz enter valid number</span
+    >
+
+    <div class="form-group">
+      <label for="pincode">Pincode:</label>
+      <input
+        type="number"
+        class="form-control"
+        id="pincode"
+        placeholder="Enter pincode"
+        name="pincode"
+        formControlName="pincode"
+      />
+    </div>
+    <span
+      *ngIf="
+        !deliveryForm.get('pincode').valid &&
+        deliveryForm.get('pincode').touched
+      "
+      >Plz enter valid pincode</span
+    >
+
+    <div class="form-group">
+      <label for="Address">Address</label>
+      <textarea
+        class="form-control"
+        rows="3"
+        formControlName="address"
+        name="address"
+      ></textarea>
+    </div>
+    <span
+      *ngIf="
+        !deliveryForm.get('address').valid &&
+        deliveryForm.get('address').touched
+      "
+      >Plz enter valid address</span
+    >
+
+    <div class="form-group">
+      <label for="city">City:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="city"
+        formControlName="city"
+        placeholder="Enter city name"
+        name="city"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="state">State:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="state"
+        placeholder="Enter state"
+        name="state"
+        formControlName="state"
+      />
+    </div>
+    <span
+      *ngIf="
+        !deliveryForm.get('state').valid && deliveryForm.get('state').touched
+      "
+      >Plz enter valid state</span
+    >
+    <br />
+
+    <button style="left: 383px" type="submit" [mat-dialog-close]="deliveryForm.value" mat-raised-button color="warn">
+      SAVE AND DELIVER HERE
+    </button>
+  </form>
+</div>
+ 

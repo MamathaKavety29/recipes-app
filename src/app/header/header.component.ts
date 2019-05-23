@@ -6,7 +6,7 @@ import { RecipeService } from '../recipes/recipe.service';
 import { CartService } from '../cart/cart.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Items } from '../shared/items.model';
-import { map } from 'rxjs/operators';import { UserService } from '../shared/userAddress/user.service';
+import { map } from 'rxjs/operators';
 ;
 
 
@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit{
 items:any
  constructor(private dataStorage:DataStorageComponent,
    private authService:AuthService,private router:Router,
-   private cartService:CartService,private userservice:UserService,
+   private cartService:CartService,
    private recipeService:RecipeService,public dialog: MatDialog
    ){}
     

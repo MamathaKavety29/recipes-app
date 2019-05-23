@@ -15,6 +15,7 @@ import { SelectedRecipes, Items } from '../shared/items.model';
   styleUrls: ["./cart.component.css"]
 })
 export class CartComponent implements OnInit,OnDestroy {
+  cartMode=false;
   recipe: Recipe;
   cartSubcsription: Subscription;
   name: string;
@@ -37,6 +38,7 @@ export class CartComponent implements OnInit,OnDestroy {
   
   ngOnInit() 
   {
+    this.cartMode=true;
    this.cartSubcsription= this.cartService.getShoppingCart().subscribe( 
      (res:any) => {
         this.items=res;

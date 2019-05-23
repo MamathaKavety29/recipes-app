@@ -1,99 +1,143 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
-import { emailDomain } from './Validators';
-import { MatSnackBar } from '@angular/material';
-
-import { UserService } from '../shared/userAddress/user.service';
-import { User } from '../shared/userAddress/user.model';
-import * as firebase from 'firebase';
-
+import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import {
+  FormGroup,
+  FormControl,
+  Validators
+} from "@angular/forms";
+import { Useraddress } from "../shared/Address/address.model";
+import { AddressService } from "../shared/Address/address.service";
+import { AddressStorage } from "../shared/Address/addressStorage.service";
+import { MatDialog } from "@angular/material";
+import { DailogFormComponent } from "./dailogform/dailogform.component";
 
 @Component({
-  selector: 'app-buy',
-  templateUrl: './buy.component.html',
-  styleUrls: ['./buy.component.css']
+  selector: "app-buy",
+  templateUrl: "./buy.component.html",
+  styleUrls: ["./buy.component.css"]
 })
 export class BuyComponent implements OnInit {
-     
-  isLinear=true;
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
-addressForm:FormGroup;
+  disabled = false;
+  // deliveryForm: FormGroup;
+  deliveryForm1 : FormGroup;
+  deliveryForm2 : FormGroup;
 
-addressData = {
-  FirstName:'',
-  LastName:'',
-  Email:'',
-  Number:'',
-  Password:'',
-  Address1:''
-};
+  editMode = false;
 
-submitted=false;
-  constructor(private snackBar: MatSnackBar,
-             private userservice:UserService){}
-
+  constructor(
+    private addService: AddressService,
+    public dialog: MatDialog,
+    private addStorage: AddressStorage
+  ) {}
+  addresses: Useraddress[] = [];
+  selectedAddress: string;
+  addressData = {
+    name: "",
+    number: "",
+    pincode: "",
+    address: "",
+    city: "",
+    state: ""
+  };
 
   ngOnInit() {
-    let phno:string = null;
-    phno="abcd";
-    console.log(phno.length);
-    this.addressForm=new FormGroup({
-      'FirstName':new FormControl(null,[Validators.required,Validators.pattern('^[A-Za-z]*$')]),
-      'LastName':new FormControl(null,[Validators.required,Validators.pattern('^[A-Za-z]*$')]),
-      'Email':new FormControl(null,[Validators.required,Validators.email,emailDomain]),
-      'Password':new FormControl(null,Validators.required),
-      'Number':new FormControl(null,[Validators.required]),
-      
-    });
+    this.addresses = this.addService.getAddresses();
+    this.formInit();
   }
 
-  onSubmit(){
-    this.submitted=true;
-    console.log(this.addressForm);
-    console.log(this.addressForm.value.FirstName);
-
-    const email=firebase.auth().currentUser.email;
-
-    let userAddress = new User({
-      FirstName : this.addressForm.value.FirstName,
-      Email :   email,
-      LastName : this.addressForm.value.LastName,
-      Password : this.addressForm.value.Password,
-      Number : this.addressForm.value.Number,
-      
-    });
-    
-    this.userservice.addAdress(userAddress);
   
-    console.log(firebase.auth().currentUser);
+  index: number;
 
-    
-    
-    this.addressData.FirstName=this.addressForm.value.FirstName;
-    this.addressData.LastName=this.addressForm.value.LastName;
-    this.addressData.Email=this.addressForm.value.Email;
-    this.addressData.Number=this.addressForm.value.Number;
-    this.addressForm.reset();
-    
-  }
+  onEdit(index: number, userAddress: Useraddress) {
+    this.editMode = true;
+    this.formInit(index, userAddress);
+    console.log(index);
 
-  openSnackBar() {
-    this.snackBar.open("Your Order Hasbeen Sucessfully Placed!!!",'payment', {
-      duration: 2000,
-    });
-    this.userservice.storeAddress().subscribe(
-      (res : Response) => {
-        console.log(res);
+    const dialogRef = this.dialog.open(DailogFormComponent, {
+      height: "800px",
+      width: "800px",
+      data: {
+        index: index,
+        address: userAddress
       }
-    )
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log("The dialog was closed");
+      userAddress = result;
+      console.log(userAddress);
+      this.addService.updateAddres(index, userAddress);
+    });
+
+    console.log(this.selectedAddress);
   }
 
+  onRemove(index:number){
+    this.addService.deleteAddress(index);
+  }
 
+  private formInit(index?: number, address?: Useraddress) {
+    let name = "";
+    let email="";
+    let number = "";
+    let address1 = "";
+    let city = "";
+    let state = "";
+    let pincode = "";
 
+    if (this.editMode) {
+      if (index) {
+        const address = this.addService.getAddress(index);
+        name = address.name;
+        email=address.email;
+        number = address.number;
+        address1 = address.address;
+        city = address.city;
+        state = address.state;
+        pincode = address.pincode;
+        console.log(pincode);
+        console.log(address);
+      }
+    }
+
+    this.deliveryForm1 = new FormGroup({
+      name: new FormControl(name, Validators.required),
+      email: new FormControl(email,Validators.required)
+    });
+
+    this.deliveryForm2 =new FormGroup({
+      address : new FormControl(address1),
+      number : new FormControl(number),
+      city : new FormControl(city),
+      state : new FormControl(state),
+      pincode : new FormControl(pincode)
+    });
+
+  }
+
+  onSubmit2()
+  {
+
+    console.log(this.deliveryForm2);
+    
+    var name = this.deliveryForm1.value.name;
+    var email=this.deliveryForm1.value.email;
+    var number = this.deliveryForm2.value.number;
+    var pincode = this.deliveryForm2.value.pincode;
+    var address = this.deliveryForm2.value.address;
+    var city = this.deliveryForm2.value.city;
+    var state = this.deliveryForm2.value.state;
+
+    var newAddress: Useraddress = new Useraddress(name,email,number,pincode,address,city,state);
+  
+
+    this.addService.addAddress(newAddress);
+
+  }
+
+  onSubmit1()
+  {
+    console.log(this.deliveryForm1);
   
   }
-  
 
-
-
+}
