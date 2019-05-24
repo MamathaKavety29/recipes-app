@@ -7,8 +7,7 @@ import { Subject } from 'rxjs';
 })
 export class AddressService {
     AddressChanged = new Subject<Useraddress[]>();
-    userAddresses:Useraddress[]=[new Useraddress('mama','mama@gmail.com','435435','24214','jjflkasjflksa','reyt','wraw'),
-    new Useraddress('mama','mama@gmail.com','435435','24214','jjflkasjflksa','reyt','wraw')];
+    userAddresses:Useraddress[]=[];
 
 
     getAddresses(){

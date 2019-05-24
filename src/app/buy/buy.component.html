@@ -1,150 +1,4 @@
-<!-- <mat-accordion>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          ADDRESS FORM
-        </mat-panel-title>
-        </mat-expansion-panel-header>
-      <form [formGroup]="deliveryForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-          <label for="name">Name:</label>
-          <input
-            type="text"
-            class="form-control"
-            id="name"
-            placeholder="Enter name"
-            name="name"
-            formControlName="name"
-          />
-        </div>
-        <span
-          *ngIf="
-            !deliveryForm.get('name').valid && deliveryForm.get('name').touched
-          "
-          >Plz enter valid name</span
-        >
-  
-        <div class="form-group">
-          <label for="Mobile Number">Mobile Number:</label>
-          <input
-            type="number"
-            class="form-control"
-            id="number"
-            placeholder="Enter number"
-            name="number"
-            formControlName="number"
-          />
-        </div>
-        <span
-          *ngIf="
-            !deliveryForm.get('number').valid &&
-            deliveryForm.get('number').touched
-          "
-          >Plz enter valid number</span
-        >
-  
-        <div class="form-group">
-          <label for="pincode">Pincode:</label>
-          <input
-            type="number"
-            class="form-control"
-            id="pincode"
-            placeholder="Enter pincode"
-            name="pincode"
-            formControlName="pincode"
-          />
-        </div>
-        <span
-          *ngIf="
-            !deliveryForm.get('pincode').valid &&
-            deliveryForm.get('pincode').touched
-          "
-          >Plz enter valid pincode</span
-        >
-  
-        <div class="form-group">
-          <label for="Address">Address</label>
-          <textarea
-            class="form-control"
-            rows="3"
-            formControlName="address"
-            name="address"
-          ></textarea>
-        </div>
-        <span
-          *ngIf="
-            !deliveryForm.get('address').valid &&
-            deliveryForm.get('address').touched
-          "
-          >Plz enter valid address</span
-        >
-  
-        <div class="form-group">
-          <label for="city">City:</label>
-          <input
-            type="text"
-            class="form-control"
-            id="city"
-            formControlName="city"
-            placeholder="Enter city name"
-            name="city"
-          />
-        </div>
-  
-        <div class="form-group">
-          <label for="state">State:</label>
-          <input
-            type="text"
-            class="form-control"
-            id="state"
-            placeholder="Enter state"
-            name="state"
-            formControlName="state"
-          />
-        </div>
-        <span
-          *ngIf="
-            !deliveryForm.get('state').valid && deliveryForm.get('state').touched
-          "
-          >Plz enter valid state</span
-        >
-        <br>
-  
-        <button style="left: 383px" type="submit" mat-raised-button color="warn">SAVE AND DELIVER HERE</button>
-        
-      </form>
-      </mat-expansion-panel>
-       <br>
-      <mat-expansion-panel>
-          <mat-expansion-panel-header>
-              <mat-panel-title>
-                ADDRESS DETAILS
-              </mat-panel-title>
-              </mat-expansion-panel-header>
-              <div *ngFor="let address of addresses;let i=index">
-                <div>
-                <div>
-                  <p><strong>{{address.name}}-{{address.number}}</strong></p>
-                  <p>{{address.address}} {{address.city}} {{address.state}} {{address.pincode}}
-                    </p>   
-              </div>
-                
-              <div>
-                  <button  mat-raised-button color="warn" (click)="onEdit(i,address)">EDIT ADDRESS</button>
-              </div>
-              </div><hr>
-
-              </div> 
-
-               
-        </mat-expansion-panel>
-
-  </mat-accordion>
-
--->
-
-
-
+<div *ngIf="newUserMode">
 <mat-horizontal-stepper>
   <mat-step>
     <ng-template matStepLabel>Fill out your Details</ng-template>
@@ -207,7 +61,7 @@
                 ADDRESS FORM
               </mat-panel-title>
               </mat-expansion-panel-header>
-              <ng-template #MsgRef>
+              <ng-template #form>
                   <form [formGroup]="deliveryForm2" (ngSubmit)="onSubmit2()"> 
                      <div class="form-group">
                          <label for="Address">Address</label>
@@ -274,7 +128,7 @@
                   </form>
                   </ng-template>
 
-                  <ng-template [ngTemplateOutlet]="MsgRef"></ng-template> 
+                  <ng-template [ngTemplateOutlet]="form"></ng-template> 
                
 
      </mat-expansion-panel>
@@ -282,6 +136,7 @@
   </mat-step>
 
   <mat-step>
+
       <ng-template matStepLabel>List of Addresses</ng-template>
       <mat-accordion>
           <mat-expansion-panel [expanded]="true">
@@ -290,12 +145,10 @@
                 ADDRESSES
               </mat-panel-title>
               </mat-expansion-panel-header>
-              <mat-radio-group
-  aria-labelledby="example-radio-group-label"
-  class="example-radio-group"
-  [(ngModel)]="selectedAddress">
+               <mat-radio-group aria-labelledby="example-radio-group-label"
+  class="example-radio-group" [(ngModel)]="selectedAddress">
 
-  <mat-radio-button  class="example-radio-button" *ngFor="let address of addresses;let i = index" [value]="address">
+  <mat-radio-button  class="example-radio-button" *ngFor="let address of loacalAddress;let i = index" [value]="address">
 
 
       <div style="width: 80%">
@@ -311,10 +164,12 @@
         </div> 
 
     </div>
+
+
     <br><hr>
         </mat-radio-button>
         </mat-radio-group>
-      
+        
         </mat-expansion-panel>
  
       <mat-expansion-panel>
@@ -323,7 +178,7 @@
                 ADD NEW ADDRESS
                 </mat-panel-title>
                 </mat-expansion-panel-header>
-                <ng-template [ngTemplateOutlet]="MsgRef"></ng-template> 
+                <ng-template [ngTemplateOutlet]="form"></ng-template> 
         </mat-expansion-panel>
           <br>        
 
@@ -334,60 +189,214 @@
           </div>
   </mat-step>
 
-  <mat-step>
-      <ng-template matStepLabel>ORDER SUMMARY</ng-template>
-      <mat-accordion>
-          <mat-expansion-panel [expanded]="true">
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                ORDER SUMMARY
-              </mat-panel-title>
-              </mat-expansion-panel-header>
-              
-               
-                 <div *ngIf="selectedAddress">
-                 <strong>YOUR ADDRESS DETAILS:</strong><p> <strong>{{selectedAddress.name}}-{{selectedAddress.number}}-{{selectedAddress.email}}</strong></p>
-                 <p>{{selectedAddress.address}} {{selectedAddress.city}} {{selectedAddress.state}} {{selectedAddress.pincode}}</p>
-                 </div>
+    <mat-step>
+        <ng-template matStepLabel>ORDER SUMMARY</ng-template>
+        <ng-template #ordersummary>
+        <mat-accordion>
+            <mat-expansion-panel [expanded]="true">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  DELIVERY ADDRESS
+                </mat-panel-title>
+                </mat-expansion-panel-header>
                 
-             
- </mat-expansion-panel>
- <br>
-<mat-expansion-panel>
-    <mat-expansion-panel-header>
-        <mat-panel-title>
-          ORDER DETAILS
-        </mat-panel-title>
-        </mat-expansion-panel-header>
-        <app-cart></app-cart>
-  </mat-expansion-panel>
-
-  <br>
-
+                 
+                   <div *ngIf="selectedAddress">
+                   <strong>YOUR ADDRESS DETAILS:</strong><p> <strong>{{selectedAddress.name}}-{{selectedAddress.number}}-{{selectedAddress.email}}</strong></p>
+                   <p>{{selectedAddress.address}} {{selectedAddress.city}} {{selectedAddress.state}} {{selectedAddress.pincode}}</p>
+                   </div>
+                  
+               
+   </mat-expansion-panel>
+   <br>
   <mat-expansion-panel>
       <mat-expansion-panel-header>
           <mat-panel-title>
-            PAYEMNT OPTIONS
+            ORDER DETAILS
           </mat-panel-title>
           </mat-expansion-panel-header>
+          <app-cart></app-cart>
+    </mat-expansion-panel>
+  
+    <br>
+  
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+              PAYEMNT OPTIONS
+            </mat-panel-title>
+            </mat-expansion-panel-header>
+  
+            <mat-radio-group aria-labelledby="example-radio-group-label"
+          class="example-radio-group">
+    <mat-radio-button class="example-radio-button"  [value]="Credit">
+    Credit / debit
+    </mat-radio-button>
+    <mat-radio-button class="example-radio-button"  [value]="Cash">
+        Cash On Delivery
+        </mat-radio-button>
+        <mat-radio-button class="example-radio-button"  [value]="Net">
+            Net Banking
+        </mat-radio-button>
+  </mat-radio-group>
+  
+  </mat-expansion-panel>
+  <br>
+   </mat-accordion>
+   </ng-template>
+   <ng-template [ngTemplateOutlet]="ordersummary"></ng-template>
+   </mat-step>
 
-          <mat-radio-group aria-labelledby="example-radio-group-label"
-        class="example-radio-group">
-  <mat-radio-button class="example-radio-button"  [value]="Credit">
-  Credit / debit
-  </mat-radio-button>
-  <mat-radio-button class="example-radio-button"  [value]="Cash">
-      Cash On Delivery
-      </mat-radio-button>
-      <mat-radio-button class="example-radio-button"  [value]="Net">
-          Net Banking
-      </mat-radio-button>
-</mat-radio-group>
-
-</mat-expansion-panel>
-<br>
- </mat-accordion>
- </mat-step>
 </mat-horizontal-stepper>
+</div>
 
 
+<!-- <ng-template>
+<mat-horizontal-stepper>
+  <mat-step>
+      <ng-template matStepLabel>List Of Address</ng-template>
+      <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                ADDRESS
+                </mat-panel-title>
+                </mat-expansion-panel-header>
+      <ng-template [ngTemplateOutlet]="selectedAddress"></ng-template>
+    
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              ADD NEW ADDRESS
+              </mat-panel-title>
+              </mat-expansion-panel-header>
+              <ng-template [ngTemplateOutlet]="form"></ng-template> 
+             </mat-expansion-panel>
+
+      </mat-accordion>
+  </mat-step>
+
+  <mat-step>
+      <ng-template [ngTemplateOutlet]="orderSummary"></ng-template>
+  </mat-step>
+
+
+
+</mat-horizontal-stepper>
+</ng-template> -->
+
+<div *ngIf="existingMode">
+<mat-horizontal-stepper>
+    <mat-step>
+        <ng-template matStepLabel>ADDRESSES</ng-template>
+        <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  ADDRESSES
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+                 <mat-radio-group aria-labelledby="example-radio-group-label"
+  class="example-radio-group" [(ngModel)]="selectedAddress">
+
+  <mat-radio-button  class="example-radio-button" *ngFor="let address of loacalAddress;let i = index" [value]="address">
+
+
+      <div>
+        <div>
+          <p><strong>{{address.name}} {{address.number}} {{address.email}}</strong></p>
+          <p>{{address.address}} {{address.city}} {{address.state}} {{address.pincode}}</p>
+           
+        </div>
+
+        <div>
+            <button mat-raised-button color="warn" (click)="onEdit(i,address)">EDIT ADDRESS</button>
+            <button style="margin-left: 20px;" mat-raised-button color="warn" (click)="onRemove(i)">REMOVE</button>
+        </div> 
+
+    </div>
+
+
+    <br><hr>
+        </mat-radio-button>
+        </mat-radio-group>
+        
+
+                
+                </mat-expansion-panel>
+<br>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        ADD NEW ADDRESS
+                        </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <ng-template [ngTemplateOutlet]="form"></ng-template> 
+                       </mat-expansion-panel>
+                </mat-accordion>
+                <br>
+                <div>
+                    <button mat-raised-button color="warn" matStepperNext>Next</button>
+                  </div>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>ORDER SUMMARY</ng-template>
+
+        <mat-accordion>
+            <mat-expansion-panel [expanded]="true">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  DELIVERY ADDRESS
+                </mat-panel-title>
+                </mat-expansion-panel-header>
+                
+                 
+                   <div *ngIf="selectedAddress">
+                   <strong>YOUR ADDRESS DETAILS:</strong><p> <strong>{{selectedAddress.name}}-{{selectedAddress.number}}-{{selectedAddress.email}}</strong></p>
+                   <p>{{selectedAddress.address}} {{selectedAddress.city}} {{selectedAddress.state}} {{selectedAddress.pincode}}</p>
+                   </div>
+                  
+               
+   </mat-expansion-panel>
+   <br>
+  <mat-expansion-panel>
+      <mat-expansion-panel-header>
+          <mat-panel-title>
+            ORDER DETAILS
+          </mat-panel-title>
+          </mat-expansion-panel-header>
+          <app-cart></app-cart>
+    </mat-expansion-panel>
+  
+    <br>
+  
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+              PAYEMNT OPTIONS
+            </mat-panel-title>
+            </mat-expansion-panel-header>
+  
+            <mat-radio-group aria-labelledby="example-radio-group-label"
+          class="example-radio-group">
+    <mat-radio-button class="example-radio-button"  [value]="Credit">
+    Credit / debit
+    </mat-radio-button>
+    <mat-radio-button class="example-radio-button"  [value]="Cash">
+        Cash On Delivery
+        </mat-radio-button>
+        <mat-radio-button class="example-radio-button"  [value]="Net">
+            Net Banking
+        </mat-radio-button>
+  </mat-radio-group>
+  
+  </mat-expansion-panel>
+  <br>
+   </mat-accordion>
+
+        
+    </mat-step>
+ </mat-horizontal-stepper>
+ </div>
